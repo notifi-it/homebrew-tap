@@ -5,7 +5,7 @@ cask "notifi" do
   url "https://github.com/notifi-it/notifi/releases/download/v#{version}/notifi-#{version}.dmg"
   name "notifi"
   desc "Push notifications for your scripts, servers and side projects"
-  homepage "https://notifi.it"
+  homepage "https://notifi.it/"
 
   livecheck do
     url :url
@@ -13,7 +13,7 @@ cask "notifi" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "notifi.app"
 
