@@ -1,0 +1,39 @@
+name: bump
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Update cask to the latest notifi release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="$(gh release view --repo notifi-it/notifi --json tagName -q .tagName)"
+          version="${tag#v}"
+          current="$(sed -n 's/^  version "\(.*\)"$/\1/p' Casks/notifi.rb)"
+          if [ "$version" = "$current" ]; then
+            echo "Already at $version"
+            exit 0
+          fi
+          curl -fsSL -o notifi.dmg \
+            "https://github.com/notifi-it/notifi/releases/download/${tag}/notifi-${version}.dmg"
+          sha="$(sha256sum notifi.dmg | cut -d' ' -f1)"
+          rm notifi.dmg
+          sed -i \
+            -e "s/^  version \".*\"$/  version \"${version}\"/" \
+            -e "s/^  sha256 \".*\"$/  sha256 \"${sha}\"/" \
+            Casks/notifi.rb
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Bump notifi to ${version}"
+          git push
