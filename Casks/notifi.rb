@@ -1,8 +1,8 @@
 cask "notifi" do
-  version "2.0.1"
-  sha256 "30183a8064f935a6aa2fc3b06d113aad046cacae000ff0a9ff592b22f26f0688"
+  version "2.0.8"
+  sha256 "16f24cde89a6be47ec8cb21ff03b8f3e2a82913061ceadbf70b654a7401e5cdd"
 
-  url "https://github.com/notifi-it/notifi/releases/download/v#{version}/notifi-#{version}.dmg"
+  url "https://github.com/notifi-it/notifi/releases/download/v#{version}/notifi.dmg"
   name "notifi"
   desc "Push notifications for your scripts, servers and side projects"
   homepage "https://notifi.it/"
