@@ -25,8 +25,8 @@ jobs:
             echo "Already at $version"
             exit 0
           fi
-          curl -fsSL -o notifi.dmg \
-            "https://github.com/notifi-it/notifi/releases/download/${tag}/notifi-${version}.dmg"
+          url="$(sed -n 's/^  url "\(.*\)"$/\1/p' Casks/notifi.rb)"
+          curl -fsSL -o notifi.dmg "${url//\#\{version\}/$version}"
           sha="$(sha256sum notifi.dmg | cut -d' ' -f1)"
           rm notifi.dmg
           sed -i \
