@@ -1,6 +1,6 @@
 cask "notifi" do
-  version "2.0.20"
-  sha256 "b195c0bb46883dff57c1ac147c306b3a09847e63d43fa8f7cbee9566b0cb0dd3"
+  version "2.0.21"
+  sha256 "48f059a53efc091b2b553881d3a82b4317778238abcd274784aefce67603c09b"
 
   url "https://github.com/notifi-it/notifi/releases/download/v#{version}/notifi-#{version}.dmg"
   name "notifi"
